@@ -1,5 +1,4 @@
 export default class Storage {
-
   constructor(bookList) {
     this.bookList = bookList;
   }
