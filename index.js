@@ -1,7 +1,5 @@
-'use strict'
-
 import renderListSection from './modules/booklist.js';
-import Storage from './modules/localStorage.js';
+import Storage from './modules/localstorage.js';
 import Book from './modules/book.js';
 import { renderAddSection } from './modules/addbook.js';
 import renderContactSection from './modules/contactUI.js';
@@ -10,15 +8,15 @@ import { DateTime } from './modules/luxon.js';
 const mainContainer = document.getElementById('main');
 const navItems = document.getElementsByClassName('navitem');
 const date = document.getElementById('date');
+const stringDate = {
+  month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true, second: 'numeric',
+};
+const now = DateTime.now();
+const newDate = now.setLocale('en-US').toLocaleString(stringDate);
+date.innerHTML = newDate;
 
 const booksList = new Storage([]);
 booksList.fromLs();
-
-for (let i = 0; i < navItems.length; i += 1) {
-  navItems[i].addEventListener('click', () => {
-    navigation(i);
-  })
-}
 
 const navigation = (value) => {
   switch (value) {
